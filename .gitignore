@@ -1,0 +1,12 @@
+# macOS
+.DS_Store
+._*
+
+# VS Code / Cursor
+.vscode/
+
+# Node
+node_modules/
+
+# Logs
+*.log
