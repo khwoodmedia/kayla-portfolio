@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Kayla Henderson-Wood — journalist, storyteller and creative consultant." />
+  <title>Kayla Henderson-Wood</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#home">KAYLA HENDERSON-WOOD</a>
+    <nav aria-label="Primary navigation">
+      <a href="#home" class="active">HOME</a>
+      <a href="#about">ABOUT</a>
+      <a href="#contact">CONTACT</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero light-section" id="home">
+      <div class="hero-inner">
+        <p class="hero-kicker">DOCUMENTING STORIES ABOUT</p>
+        <div class="rotating-word-wrap" aria-live="polite">
+          <span class="rotating-word" id="rotatingWord">COMMUNITY</span>
+        </div>
+        <h1 class="hero-bottom">THEN FINDING THE BEST WAY TO<br>BRING THEM TO LIFE.</h1>
+        <a class="scroll-cue" href="#video-work">
+          <span aria-hidden="true">↓</span> SCROLL TO EXPLORE
+        </a>
+      </div>
+    </section>
+
+    <section class="dark-section section-pad" id="video-work">
+      <div class="section-heading-row">
+        <h2>VIDEO WORK</h2>
+        <p>HOVER TO PAUSE <span aria-hidden="true">→</span></p>
+      </div>
+
+      <div class="video-carousel" aria-label="Video portfolio carousel">
+        <button class="carousel-arrow prev" aria-label="Previous videos">←</button>
+
+        <div class="video-track" id="videoTrack">
+          <article class="video-card">
+            <video muted loop autoplay playsinline poster="assets/video-1.svg">
+              <source src="" type="video/mp4">
+            </video>
+            <button class="sound-toggle" aria-label="Unmute video">UNMUTE</button>
+          </article>
+
+          <article class="video-card">
+            <video muted loop autoplay playsinline poster="assets/video-2.svg">
+              <source src="" type="video/mp4">
+            </video>
+            <button class="sound-toggle" aria-label="Unmute video">UNMUTE</button>
+          </article>
+
+          <article class="video-card featured-video">
+            <video muted loop autoplay playsinline poster="assets/video-3.svg">
+              <source src="" type="video/mp4">
+            </video>
+            <button class="sound-toggle" aria-label="Unmute video">UNMUTE</button>
+          </article>
+
+          <article class="video-card">
+            <video muted loop autoplay playsinline poster="assets/video-4.svg">
+              <source src="" type="video/mp4">
+            </video>
+            <button class="sound-toggle" aria-label="Unmute video">UNMUTE</button>
+          </article>
+
+          <article class="video-card">
+            <video muted loop autoplay playsinline poster="assets/video-5.svg">
+              <source src="" type="video/mp4">
+            </video>
+            <button class="sound-toggle" aria-label="Unmute video">UNMUTE</button>
+          </article>
+        </div>
+
+        <button class="carousel-arrow next" aria-label="Next videos">→</button>
+      </div>
+      <div class="carousel-progress"><span></span></div>
+    </section>
+
+    <section class="journalism light-section section-pad" id="journalism">
+      <div class="journalism-intro">
+        <h2>JOURNALISM</h2>
+        <p>Stories, interviews and features that explore culture, justice, creativity and the people shaping them.</p>
+        <span class="red-rule"></span>
+      </div>
+
+      <div class="byline-list" role="listbox" aria-label="Journalism bylines">
+        <button class="byline-item" data-index="0">
+          <span>01</span><strong>KQED</strong>
+        </button>
+        <button class="byline-item active" data-index="1">
+          <span>02</span><strong>PORTLAND MONTHLY</strong>
+        </button>
+        <button class="byline-item" data-index="2">
+          <span>03</span><strong>OREGON MAGAZINE</strong>
+        </button>
+        <button class="byline-item" data-index="3">
+          <span>04</span><strong>EUGENE WEEKLY</strong>
+        </button>
+        <button class="byline-item" data-index="4">
+          <span>05</span><strong>SAN QUENTIN NEWS</strong>
+        </button>
+        <button class="byline-item" data-index="5">
+          <span>06</span><strong>GOOD COMPENNY</strong>
+        </button>
+        <button class="byline-item" data-index="6">
+          <span>07</span><strong>GLUED MAGAZINE</strong>
+        </button>
+      </div>
+
+      <figure class="journalism-image">
+        <img id="bylineImage" src="assets/byline-2.svg" alt="Selected journalism story" />
+      </figure>
+
+      <div class="story-copy">
+        <p class="story-publication" id="storyPublication">PORTLAND MONTHLY</p>
+        <h3 id="storyTitle">A NEW GENERATION<br>BUILT DIFFERENT</h3>
+        <p id="storyDescription">A feature about emerging creatives, the communities they shape and the ideas moving culture forward.</p>
+        <a id="storyLink" href="#" target="_blank" rel="noopener">READ STORY <span>→</span></a>
+      </div>
+    </section>
+
+    <section class="dark-section section-pad" id="print-publications">
+      <div class="section-heading-row">
+        <h2>PRINT PUBLICATIONS</h2>
+      </div>
+
+      <div class="publication-grid">
+        <article class="publication-card" tabindex="0">
+          <div class="publication-inner">
+            <div class="publication-face publication-front"><img src="assets/pub-1.svg" alt="Good Compenny publication interior"></div>
+            <div class="publication-face publication-back"><img src="assets/pub-1-cover.svg" alt="Good Compenny cover"></div>
+          </div>
+        </article>
+
+        <article class="publication-card" tabindex="0">
+          <div class="publication-inner">
+            <div class="publication-face publication-front"><img src="assets/pub-2.svg" alt="Glued publication interior"></div>
+            <div class="publication-face publication-back"><img src="assets/pub-2-cover.svg" alt="Glued cover"></div>
+          </div>
+        </article>
+
+        <article class="publication-card" tabindex="0">
+          <div class="publication-inner">
+            <div class="publication-face publication-front"><img src="assets/pub-3.svg" alt="Clicked publication interior"></div>
+            <div class="publication-face publication-back"><img src="assets/pub-3-cover.svg" alt="Clicked cover"></div>
+          </div>
+        </article>
+
+        <article class="publication-card" tabindex="0">
+          <div class="publication-inner">
+            <div class="publication-face publication-front"><img src="assets/pub-4.svg" alt="Portland publication interior"></div>
+            <div class="publication-face publication-back"><img src="assets/pub-4-cover.svg" alt="Portland cover"></div>
+          </div>
+        </article>
+
+        <article class="publication-card" tabindex="0">
+          <div class="publication-inner">
+            <div class="publication-face publication-front"><img src="assets/pub-5.svg" alt="KQED publication interior"></div>
+            <div class="publication-face publication-back"><img src="assets/pub-5-cover.svg" alt="KQED cover"></div>
+          </div>
+        </article>
+
+        <article class="publication-card" tabindex="0">
+          <div class="publication-inner">
+            <div class="publication-face publication-front"><img src="assets/pub-6.svg" alt="Eugene Weekly publication interior"></div>
+            <div class="publication-face publication-back"><img src="assets/pub-6-cover.svg" alt="Eugene Weekly cover"></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="social-section light-section section-pad" id="social-media">
+      <div class="social-intro">
+        <h2>SOCIAL MEDIA</h2>
+        <p>The accounts I create.<br>The stories I tell.<br>The communities I build.</p>
+        <span class="red-rule"></span>
+      </div>
+
+      <div class="phone-stage">
+        <div class="phone">
+          <div class="phone-notch"></div>
+          <img id="phoneImage" src="assets/social-1.svg" alt="Social media project shown inside a phone" />
+        </div>
+      </div>
+
+      <div class="social-copy">
+        <p class="eyebrow" id="socialAccount">GOOD COMPENNY MAGAZINE</p>
+        <h3 id="socialHandle">@GOODCOMPENNY</h3>
+        <p id="socialDescription">Building a platform for culture makers and the stories that deserve to be seen.</p>
+
+        <div class="social-stats">
+          <div><strong id="statOne">12K</strong><span>FOLLOWERS</span></div>
+          <div><strong id="statTwo">8.6%</strong><span>ENGAGEMENT RATE</span></div>
+          <div><strong id="statThree">250K+</strong><span>MONTHLY REACH</span></div>
+        </div>
+      </div>
+
+      <div class="social-scroll-hints" aria-label="Social project controls">
+        <button data-social="0" class="active" aria-label="Show first social project"></button>
+        <button data-social="1" aria-label="Show second social project"></button>
+        <button data-social="2" aria-label="Show third social project"></button>
+      </div>
+    </section>
+
+    <section class="about-section light-section section-pad" id="about">
+      <p class="eyebrow">ABOUT ME</p>
+      <h2>I BUILD STORIES ACROSS<br>WORDS, IMAGES AND IDEAS.</h2>
+      <p>
+        I’m Kayla Henderson-Wood, a journalist, multimedia storyteller and communications consultant.
+        My work centers community, culture and social change—and uses the medium that serves each story best.
+      </p>
+    </section>
+
+    <section class="contact-section" id="contact">
+      <div class="contact-copy">
+        <h2>CONTACT ME</h2>
+        <p>I’m always open to new stories, collaborations and opportunities.<br>Let’s connect.</p>
+        <dl>
+          <div><dt>EMAIL</dt><dd><a href="mailto:kaylalwood@yahoo.com">kaylalwood@yahoo.com</a></dd></div>
+          <div><dt>SOCIAL</dt><dd><a href="#">Instagram</a> / <a href="#">LinkedIn</a></dd></div>
+        </dl>
+      </div>
+
+      <form class="contact-form" action="https://formspree.io/f/your-form-id" method="POST">
+        <div class="form-row">
+          <label>NAME<input type="text" name="name" required></label>
+          <label>EMAIL<input type="email" name="email" required></label>
+        </div>
+        <label>SUBJECT<input type="text" name="subject"></label>
+        <label>MESSAGE<textarea name="message" rows="6" required></textarea></label>
+        <button type="submit">SEND MESSAGE <span>↗</span></button>
+      </form>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
