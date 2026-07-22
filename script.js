@@ -1,16 +1,34 @@
 const rotatingWords = ["COMMUNITY", "CULTURE", "JUSTICE", "INNOVATION", "CHANGE"];
+const heroImages = [
+  "assets/hero-community.JPG",
+  "assets/hero-culture.JPG",
+  "assets/hero-justice.JPG",
+  "assets/hero-innovation.JPG",
+  "assets/hero-change.JPG"
+];
 const rotatingWord = document.getElementById("rotatingWord");
+const heroImage = document.getElementById("heroImage");
 let wordIndex = 0;
+
+function setHeroImage(index) {
+  heroImage.src = heroImages[index];
+  heroImage.alt = `Stories about ${rotatingWords[index].toLowerCase()}`;
+}
 
 setInterval(() => {
   rotatingWord.classList.remove("swap-in");
   rotatingWord.classList.add("swap-out");
+  heroImage.classList.remove("swap-in");
+  heroImage.classList.add("swap-out");
 
   setTimeout(() => {
     wordIndex = (wordIndex + 1) % rotatingWords.length;
-    rotatingWord.textContent = rotatingWords[wordIndex];
+    rotatingWord.textContent = `${rotatingWords[wordIndex]},`;
+    setHeroImage(wordIndex);
     rotatingWord.classList.remove("swap-out");
     rotatingWord.classList.add("swap-in");
+    heroImage.classList.remove("swap-out");
+    heroImage.classList.add("swap-in");
   }, 330);
 }, 2600);
 
@@ -19,8 +37,21 @@ document.querySelectorAll(".video-card").forEach((card) => {
   const video = card.querySelector("video");
   const soundButton = card.querySelector(".sound-toggle");
 
-  card.addEventListener("mouseenter", () => video.pause());
-  card.addEventListener("mouseleave", () => video.play().catch(() => {}));
+  const playVideo = () => {
+    video.play().catch(() => {});
+  };
+
+  const pauseVideo = () => {
+    video.pause();
+    video.currentTime = 0;
+  };
+
+  card.addEventListener("mouseenter", playVideo);
+  card.addEventListener("mouseleave", pauseVideo);
+  card.addEventListener("focusin", playVideo);
+  card.addEventListener("focusout", (event) => {
+    if (!card.contains(event.relatedTarget)) pauseVideo();
+  });
 
   soundButton.addEventListener("click", (event) => {
     event.stopPropagation();
@@ -29,153 +60,228 @@ document.querySelectorAll(".video-card").forEach((card) => {
   });
 });
 
-const videoTrack = document.getElementById("videoTrack");
-document.querySelector(".carousel-arrow.next").addEventListener("click", () => {
-  videoTrack.scrollBy({ left: videoTrack.clientWidth * 0.75, behavior: "smooth" });
-});
-document.querySelector(".carousel-arrow.prev").addEventListener("click", () => {
-  videoTrack.scrollBy({ left: -videoTrack.clientWidth * 0.75, behavior: "smooth" });
-});
 
 // Journalism bylines
 const bylines = [
   {
     publication: "KQED",
-    title: "THE ARTISTS<br>RESHAPING THE BAY",
-    description: "Reporting on the people and ideas expanding the region’s cultural imagination.",
-    image: "assets/byline-1.svg",
-    link: "#"
+    title: "When Family Business Becomes Big Business",
+    description: "LaRussell, the Bay Area's most resourceful independent artist, is in talks with Def Jam Records about signing a deal.",
+    link: "https://www.kqed.org/arts/13937331/larussell-vallejo-def-jam-record-deal"
   },
   {
-    publication: "PORTLAND MONTHLY",
-    title: "A NEW GENERATION<br>BUILT DIFFERENT",
-    description: "A feature about emerging creatives, the communities they shape and the ideas moving culture forward.",
-    image: "assets/byline-2.svg",
-    link: "#"
+    publication: "Portland Monthly",
+    title: "Mama Box Is Baking Some of the Most Exciting Pastries in Portland",
+    description: "Former Le Pigeon cook Darla Shaffer’s waitlist is a month long. Go now.",
+    link: "https://www.pdxmonthly.com/eat-and-drink/2021/04/mama-box-is-baking-some-of-the-most-exciting-pastries-in-portland"
   },
   {
-    publication: "OREGON MAGAZINE",
-    title: "CREATIVITY BEYOND<br>THE EXPECTED",
-    description: "A closer look at the artists building new creative pathways throughout Oregon.",
-    image: "assets/byline-3.svg",
-    link: "#"
+    publication: "Eugene Weekly",
+    title: "Eugene Nail Artist and Activist",
+    description: "Kinaya Haug’s palette of nails reflects her art and social activism.",
+    link: "https://eugeneweekly.com/2021/03/04/eugene-nail-artist-and-activist/"
   },
   {
-    publication: "EUGENE WEEKLY",
-    title: "THE PEOPLE MOVING<br>THE CONVERSATION",
-    description: "Stories about culture, identity and community change.",
-    image: "assets/byline-4.svg",
-    link: "#"
+    publication: "The Oaklandside",
+    title: "‘Futurisme’ is Senay Alkebu-lan’s ode to techno, labor activism, and Oakland",
+    description: "Known for his Madow Futur streetwear collection, the artist’s new project blends revolutionary politics, industrial aesthetics, and music.",
+    link: "https://oaklandside.org/2023/11/03/futurisme-senay-alkebu-lan-oakland/"
   },
   {
-    publication: "SAN QUENTIN NEWS",
-    title: "STORIES OF RETURN,<br>REPAIR AND POSSIBILITY",
-    description: "Reporting centered on reentry, dignity and life beyond incarceration.",
-    image: "assets/byline-5.svg",
-    link: "#"
+    publication: "The Observer",
+    title: "Those who know the way show the way",
+    description: "Henry Ortiz, founder of Community Healers, a nonprofit that works closely with the Sacramento community and an organizer for All of Us of None, a group of people working for human rights for people formerly incarcerated.",
+    link: "https://www.theobserver.media/health/those-who-know-the-way-show-the-way-fadc2ce2/"
   },
   {
-    publication: "GOOD COMPENNY",
-    title: "THE CULTURE,<br>IN ITS OWN WORDS",
-    description: "Long-form conversations with artists, musicians and cultural architects.",
-    image: "assets/byline-6.svg",
-    link: "#"
-  },
-  {
-    publication: "GLUED MAGAZINE",
-    title: "STORIES THAT STICK",
-    description: "Independent storytelling built around community, creativity and memory.",
-    image: "assets/byline-7.svg",
-    link: "#"
+    publication: "The Observer",
+    title: "Hip-Hop Crime Fighters Use Words and Music to Defuse Gun Violence",
+    description: "Organized Voices Presents Hip Hop and Civil Rights hosted by Mars Parker, guest speakers DJ Yella of NWA and DJ Cli-n-tel and Lonzo of World Class Wreckin Cru.",
+    link: "https://www.theobserver.media/arts-culture/hip-hop-crime-fighters-use-words-music-to-defuse-gun-violence-cd31d837/"
   }
 ];
 
-const bylineButtons = [...document.querySelectorAll(".byline-item")];
-const bylineImage = document.getElementById("bylineImage");
-const storyPublication = document.getElementById("storyPublication");
-const storyTitle = document.getElementById("storyTitle");
-const storyDescription = document.getElementById("storyDescription");
-const storyLink = document.getElementById("storyLink");
+const bylineList = document.querySelector(".byline-list");
 
-function setByline(index) {
-  const item = bylines[index];
-  bylineButtons.forEach((button, i) => button.classList.toggle("active", i === index));
-  bylineImage.animate([{opacity: .2, transform: "translateY(10px)"}, {opacity: 1, transform: "translateY(0)"}], {duration: 300});
-  bylineImage.src = item.image;
-  storyPublication.textContent = item.publication;
-  storyTitle.innerHTML = item.title;
-  storyDescription.textContent = item.description;
-  storyLink.href = item.link;
-}
-
-bylineButtons.forEach((button) => {
-  button.addEventListener("mouseenter", () => setByline(Number(button.dataset.index)));
-  button.addEventListener("focus", () => setByline(Number(button.dataset.index)));
-  button.addEventListener("click", () => setByline(Number(button.dataset.index)));
+bylines.forEach((item, index) => {
+  const article = document.createElement("article");
+  article.className = "byline-item";
+  article.setAttribute("role", "listitem");
+  article.innerHTML = `
+    <button class="byline-trigger" type="button" aria-expanded="false">
+      <span>${String(index + 1).padStart(2, "0")}</span>
+      <strong>${item.publication}: ${item.title}</strong>
+    </button>
+    <div class="byline-panel">
+      <p class="byline-description">${item.description}</p>
+      <a class="byline-link" href="${item.link}" target="_blank" rel="noopener">Read more <span aria-hidden="true">→</span></a>
+    </div>
+  `;
+  bylineList.appendChild(article);
 });
 
-// Social projects
-const socialProjects = [
-  {
-    account: "GOOD COMPENNY MAGAZINE",
-    handle: "@GOODCOMPENNY",
-    description: "Building a platform for culture makers and the stories that deserve to be seen.",
-    image: "assets/social-1.svg",
-    stats: ["12K", "8.6%", "250K+"]
-  },
-  {
-    account: "NONPROFIT COMMUNICATIONS",
-    handle: "@COMMUNITYSTORIES",
-    description: "Turning impact, programs and lived experience into clear, engaging social storytelling.",
-    image: "assets/social-2.svg",
-    stats: ["104%", "93%", "124%"]
-  },
-  {
-    account: "EDITORIAL CAMPAIGNS",
-    handle: "@STORYLED",
-    description: "Building cross-platform campaigns that connect print, video and digital audiences.",
-    image: "assets/social-3.svg",
-    stats: ["1M+", "40+", "10X"]
-  }
-];
+bylineList.querySelectorAll(".byline-trigger").forEach((trigger) => {
+  trigger.addEventListener("click", () => {
+    const item = trigger.closest(".byline-item");
+    const isOpen = item.classList.contains("is-open");
 
-const phoneImage = document.getElementById("phoneImage");
-const socialAccount = document.getElementById("socialAccount");
-const socialHandle = document.getElementById("socialHandle");
-const socialDescription = document.getElementById("socialDescription");
-const socialButtons = [...document.querySelectorAll("[data-social]")];
-const statOne = document.getElementById("statOne");
-const statTwo = document.getElementById("statTwo");
-const statThree = document.getElementById("statThree");
+    bylineList.querySelectorAll(".byline-item").forEach((entry) => {
+      entry.classList.remove("is-open");
+      entry.querySelector(".byline-trigger").setAttribute("aria-expanded", "false");
+    });
 
-function setSocial(index) {
-  const project = socialProjects[index];
-  socialButtons.forEach((button, i) => button.classList.toggle("active", i === index));
-  phoneImage.animate([{opacity: .25, transform: "translateY(16px)"}, {opacity: 1, transform: "translateY(0)"}], {duration: 350});
-  phoneImage.src = project.image;
-  socialAccount.textContent = project.account;
-  socialHandle.textContent = project.handle;
-  socialDescription.textContent = project.description;
-  [statOne.textContent, statTwo.textContent, statThree.textContent] = project.stats;
-}
-
-socialButtons.forEach((button) => {
-  button.addEventListener("click", () => setSocial(Number(button.dataset.social)));
-});
-
-// Scroll-driven social change
-const socialSection = document.querySelector(".social-section");
-let currentSocial = 0;
-
-window.addEventListener("scroll", () => {
-  const rect = socialSection.getBoundingClientRect();
-  const viewport = window.innerHeight;
-  if (rect.top < viewport && rect.bottom > 0) {
-    const progress = Math.min(0.999, Math.max(0, (viewport - rect.top) / (viewport + rect.height)));
-    const nextIndex = Math.min(2, Math.floor(progress * 3));
-    if (nextIndex !== currentSocial) {
-      currentSocial = nextIndex;
-      setSocial(currentSocial);
+    if (!isOpen) {
+      item.classList.add("is-open");
+      trigger.setAttribute("aria-expanded", "true");
     }
+  });
+});
+
+// Social media grid
+const socialPosts = [
+  { image: "assets/social-1.JPG", link: "https://www.instagram.com/p/DA1ilSizu0n/?igsh=NjZiM2M3MzIxNA%3D%3D", alt: "Social media project 1", cta: "Full post" },
+  { image: "assets/social-2.JPG", link: "https://www.linkedin.com/feed/update/urn:li:activity:7472736033525116928", alt: "Social media project 2", cta: "Full post" },
+  { image: "assets/social-4.jpg", link: "https://www.instagram.com/reels/C8pzD9iR9kQ/", alt: "Social media project 3", cta: "Full post" },
+  { image: "assets/social-3.JPG", fullImage: "assets/social-3-full.png", alt: "Social media project 4", cta: "Full Carousel", focus: "up" },
+  { image: "assets/social-5.JPG", fullImage: "assets/social-5-full.png", alt: "Social media project 5", cta: "Full Carousel" },
+  { image: "assets/social-6-full.png", fullImage: "assets/social-6-full.png", alt: "Social media project 6", cta: "Full Carousel", focus: "left" }
+];
+
+const socialGrid = document.querySelector(".social-grid");
+const socialLightbox = document.getElementById("socialLightbox");
+const socialLightboxImage = document.getElementById("socialLightboxImage");
+const socialLightboxClose = document.getElementById("socialLightboxClose");
+
+function openSocialLightbox(src, alt) {
+  socialLightboxImage.src = src;
+  socialLightboxImage.alt = alt;
+  socialLightbox.hidden = false;
+  document.body.style.overflow = "hidden";
+  socialLightboxClose.focus();
+}
+
+function closeSocialLightbox() {
+  socialLightbox.hidden = true;
+  socialLightboxImage.removeAttribute("src");
+  socialLightboxImage.alt = "";
+  document.body.style.overflow = "";
+}
+
+socialPosts.forEach((post) => {
+  const card = document.createElement("article");
+  card.className = "social-card";
+  if (post.focus === "left") card.classList.add("social-card--focus-left");
+  if (post.focus === "up") card.classList.add("social-card--focus-up");
+
+  const action = post.fullImage
+    ? `<button type="button" class="social-card-link" data-full-image="${post.fullImage}" data-full-alt="${post.alt}">${post.cta} <span aria-hidden="true">→</span></button>`
+    : `<a class="social-card-link" href="${post.link}" target="_blank" rel="noopener">${post.cta} <span aria-hidden="true">→</span></a>`;
+
+  card.innerHTML = `
+    <img src="${post.image}" alt="${post.alt}">
+    <div class="social-card-overlay">
+      ${action}
+    </div>
+  `;
+  socialGrid.appendChild(card);
+});
+
+socialGrid.addEventListener("click", (event) => {
+  const trigger = event.target.closest("[data-full-image]");
+  if (!trigger) return;
+  openSocialLightbox(trigger.dataset.fullImage, trigger.dataset.fullAlt);
+});
+
+socialLightboxClose.addEventListener("click", closeSocialLightbox);
+socialLightbox.addEventListener("click", (event) => {
+  if (event.target === socialLightbox) closeSocialLightbox();
+});
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && !socialLightbox.hidden) closeSocialLightbox();
+});
+
+// Section fade on scroll
+const scrollSections = [...document.querySelectorAll("main > section")];
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+function clamp(value, min, max) {
+  return Math.min(max, Math.max(min, value));
+}
+
+function sectionOpacity(rect, viewportHeight) {
+  const minOpacity = 0.58;
+  const fadeZone = viewportHeight * 0.48;
+
+  if (rect.bottom <= 0 || rect.top >= viewportHeight) {
+    return minOpacity;
   }
-}, { passive: true });
+
+  const enterProgress = clamp((viewportHeight - rect.top) / fadeZone, 0, 1);
+  const exitProgress = clamp(rect.bottom / fadeZone, 0, 1);
+  const progress = Math.min(enterProgress, exitProgress);
+  const eased = progress * progress * (3 - 2 * progress);
+
+  return minOpacity + eased * (1 - minOpacity);
+}
+
+function updateSectionOpacities() {
+  if (prefersReducedMotion.matches) {
+    scrollSections.forEach((section) => section.style.removeProperty("--section-opacity"));
+    return;
+  }
+
+  const viewportHeight = window.innerHeight;
+  scrollSections.forEach((section) => {
+    section.style.setProperty("--section-opacity", sectionOpacity(section.getBoundingClientRect(), viewportHeight));
+  });
+}
+
+let sectionFadeTicking = false;
+
+function queueSectionFadeUpdate() {
+  if (sectionFadeTicking) return;
+  sectionFadeTicking = true;
+  requestAnimationFrame(() => {
+    updateSectionOpacities();
+    sectionFadeTicking = false;
+  });
+}
+
+window.addEventListener("scroll", queueSectionFadeUpdate, { passive: true });
+window.addEventListener("resize", queueSectionFadeUpdate, { passive: true });
+prefersReducedMotion.addEventListener("change", updateSectionOpacities);
+updateSectionOpacities();
+
+// Same-page nav jumps (Home / About / Contact)
+const navLinks = [...document.querySelectorAll('.site-header a[href^="#"]')];
+
+function setActiveNav(hash) {
+  navLinks.forEach((link) => {
+    link.classList.toggle("active", link.getAttribute("href") === hash);
+  });
+}
+
+function scrollToHash(hash) {
+  const target = document.querySelector(hash);
+  if (!target) return;
+  target.scrollIntoView({
+    behavior: prefersReducedMotion.matches ? "auto" : "smooth",
+    block: "start"
+  });
+  history.replaceState(null, "", hash);
+  setActiveNav(hash);
+  queueSectionFadeUpdate();
+}
+
+navLinks.forEach((link) => {
+  link.addEventListener("click", (event) => {
+    const hash = link.getAttribute("href");
+    if (!hash || hash === "#") return;
+    event.preventDefault();
+    scrollToHash(hash);
+  });
+});
+
+if (location.hash) {
+  setActiveNav(location.hash);
+}
