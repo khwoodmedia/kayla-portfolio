@@ -7,29 +7,60 @@ const heroImages = [
   "assets/hero-change.JPG"
 ];
 const rotatingWord = document.getElementById("rotatingWord");
-const heroImage = document.getElementById("heroImage");
+const heroSlots = [...document.querySelectorAll(".hero-visual-img")];
 let wordIndex = 0;
+let activeSlot = 0;
+let heroBusy = false;
 
-function setHeroImage(index) {
-  heroImage.src = heroImages[index];
-  heroImage.alt = `Stories about ${rotatingWords[index].toLowerCase()}`;
+function prepareHeroSlot(slot, index) {
+  const img = heroSlots[slot];
+  if (img.getAttribute("src") !== heroImages[index]) {
+    img.src = heroImages[index];
+  }
+  img.alt = `Stories about ${rotatingWords[index].toLowerCase()}`;
+  return img.decode ? img.decode().catch(() => {}) : Promise.resolve();
 }
 
-setInterval(() => {
-  rotatingWord.classList.remove("swap-in");
-  rotatingWord.classList.add("swap-out");
-  heroImage.classList.remove("swap-in");
-  heroImage.classList.add("swap-out");
+// Preload every hero image, and keep the next slide decoded in the inactive slot
+heroImages.forEach((src) => {
+  const img = new Image();
+  img.src = src;
+});
+let nextHeroReady = prepareHeroSlot(1, 1);
 
-  setTimeout(() => {
-    wordIndex = (wordIndex + 1) % rotatingWords.length;
-    rotatingWord.textContent = `${rotatingWords[wordIndex]},`;
-    setHeroImage(wordIndex);
-    rotatingWord.classList.remove("swap-out");
-    rotatingWord.classList.add("swap-in");
-    heroImage.classList.remove("swap-out");
-    heroImage.classList.add("swap-in");
-  }, 330);
+setInterval(() => {
+  if (heroBusy) return;
+  heroBusy = true;
+
+  const nextIndex = (wordIndex + 1) % rotatingWords.length;
+  const currentImg = heroSlots[activeSlot];
+  const nextImg = heroSlots[1 - activeSlot];
+
+  nextHeroReady.then(() => {
+    rotatingWord.classList.remove("swap-in");
+    rotatingWord.classList.add("swap-out");
+    currentImg.classList.remove("swap-in");
+    currentImg.classList.add("swap-out");
+
+    setTimeout(() => {
+      wordIndex = nextIndex;
+      rotatingWord.textContent = `${rotatingWords[wordIndex]},`;
+
+      currentImg.classList.remove("is-active", "swap-out");
+      currentImg.setAttribute("aria-hidden", "true");
+      nextImg.classList.add("is-active");
+      nextImg.classList.remove("swap-out");
+      nextImg.classList.add("swap-in");
+      nextImg.setAttribute("aria-hidden", "false");
+
+      rotatingWord.classList.remove("swap-out");
+      rotatingWord.classList.add("swap-in");
+
+      activeSlot = 1 - activeSlot;
+      nextHeroReady = prepareHeroSlot(1 - activeSlot, (wordIndex + 1) % rotatingWords.length);
+      heroBusy = false;
+    }, 330);
+  });
 }, 2600);
 
 // Video behavior

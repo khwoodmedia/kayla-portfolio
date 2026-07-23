@@ -60,21 +60,34 @@ main > section {
 }
 .hero-copy { min-width: 0; }
 .hero-visual {
+  position: relative;
   margin: 0;
   width: min(360px, 34vw);
   flex-shrink: 0;
   overflow: hidden;
+  aspect-ratio: 4 / 5;
 }
-.hero-visual img {
+.hero-visual-img {
   display: block;
   width: 100%;
-  aspect-ratio: 4 / 5;
+  height: 100%;
   object-fit: cover;
   border-radius: 4px;
   transform-origin: center;
 }
-.hero-visual img.swap-out { animation: wordOut .34s ease forwards; }
-.hero-visual img.swap-in { animation: wordIn .38s ease forwards; }
+.hero-visual-img.is-active {
+  position: relative;
+  z-index: 1;
+}
+.hero-visual-img:not(.is-active) {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+.hero-visual-img.swap-out { animation: wordOut .34s ease forwards; }
+.hero-visual-img.swap-in { animation: wordIn .38s ease forwards; }
 .hero-kicker,
 .hero-bottom,
 .rotating-word,
