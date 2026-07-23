@@ -507,12 +507,25 @@ main > section {
   line-height: .92;
   max-width: 1250px;
 }
-.about-section > p:last-child {
+.about-section > p {
   max-width: 760px;
   font-size: 18px;
   line-height: 1.7;
   color: #ddd;
 }
+.about-link {
+  display: inline-block;
+  margin-top: 28px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: #fff;
+  text-decoration: underline;
+  text-decoration-color: var(--red);
+  text-underline-offset: .18em;
+}
+.about-link:hover { text-decoration-color: #fff; }
 
 .contact-section {
   background: var(--paper);
