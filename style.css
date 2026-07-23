@@ -563,13 +563,22 @@ main > section {
 
 @media (max-width: 900px) {
   .hero-inner {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 28px;
   }
-  .hero-visual {
-    width: min(300px, 72vw);
-    justify-self: end;
+  .hero-copy {
+    display: contents;
   }
+  .hero-kicker { order: 1; }
+  .rotating-word-wrap { order: 2; }
+  .hero-bottom { order: 3; }
+  .hero-visual {
+    order: 4;
+    width: min(300px, 72vw);
+    align-self: center;
+  }
+  .scroll-cue { order: 5; }
 }
 
 @media (max-width: 700px) {
