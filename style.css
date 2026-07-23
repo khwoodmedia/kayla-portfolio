@@ -572,7 +572,10 @@ main > section {
   }
   .hero-kicker { order: 1; }
   .rotating-word-wrap { order: 2; }
-  .hero-bottom { order: 3; }
+  .hero-bottom {
+    order: 3;
+    text-align: center;
+  }
   .hero-visual {
     order: 4;
     width: min(300px, 72vw);
